@@ -1,0 +1,6 @@
+DO ZROBIENIA: (Po skończeniu nalepiej odznaczać jako DONE)
+1. Header w JS + Pogoda i może opcje logowania się
+2. Newsy + info
+3. Responsywność
+4. Znaleść zdjęcia i jakieś info dla części News i info
+5. Reklamy może
