@@ -1,90 +1,90 @@
-// ...existing code...
-(() => {
-    const qs = (sel, ctx = document) => ctx.querySelector(sel);
-    const qsa = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+// Simple JavaScript for interactivity
 
-    function setFooterYear() {
-        const p = qs('footer .footer-content p');
-        if (p) p.textContent = `© ${new Date().getFullYear()} Wirtualna Polska`;
+// Search functionality
+const searchInput = document.querySelector('.header__search-input');
+if (searchInput) {
+  searchInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      const searchTerm = this.value.trim();
+      if (searchTerm) {
+        alert(`Szukanie: "${searchTerm}"`);
+        // Here you would typically redirect to a search results page
+        // window.location.href = `/search?q=${encodeURIComponent(searchTerm)}`;
+      }
     }
+  });
+}
 
-    function createNewsItem({title, summary, img}) {
-        const article = document.createElement('article');
-        article.className = 'news-item';
-
-        const imgEl = document.createElement('img');
-        imgEl.alt = title;
-        imgEl.dataset.src = img || '../Images/Logo.webp';
-        imgEl.className = 'lazy';
-        article.appendChild(imgEl);
-
-        const h3 = document.createElement('h3');
-        h3.textContent = title;
-        article.appendChild(h3);
-
-        const p = document.createElement('p');
-        p.textContent = summary;
-        article.appendChild(p);
-
-        return article;
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
+  });
+});
 
-    function renderNews(items = []) {
-        const grid = qs('.news-grid');
-        if (!grid) return;
-        grid.innerHTML = '';
-        items.forEach(it => grid.appendChild(createNewsItem(it)));
-        lazyLoadImages();
+// Add animation on scroll
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
     }
+  });
+}, observerOptions);
 
-    function sampleNews(count = 6) {
-        const out = [];
-        for (let i = 1; i <= count; i++) {
-            out.push({
-                title: `Nagłówek ${i}`,
-                summary: `Krótki opis wiadomości numer ${i}.`,
-                img: '../Images/Logo.webp'
-            });
-        }
-        return out;
-    }
+// Observe news articles for fade-in animation
+document.addEventListener('DOMContentLoaded', () => {
+  const articles = document.querySelectorAll('.news-article');
+  articles.forEach((article, index) => {
+    article.style.opacity = '0';
+    article.style.transform = 'translateY(20px)';
+    article.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+    observer.observe(article);
+  });
 
-    function lazyLoadImages() {
-        const images = qsa('img.lazy');
-        if ('IntersectionObserver' in window) {
-            const io = new IntersectionObserver((entries, obs) => {
-                entries.forEach(en => {
-                    if (en.isIntersecting) {
-                        const img = en.target;
-                        if (img.dataset.src) img.src = img.dataset.src;
-                        img.classList.remove('lazy');
-                        obs.unobserve(img);
-                    }
-                });
-            }, {rootMargin: '50px 0px', threshold: 0.01});
-            images.forEach(img => io.observe(img));
-        } else {
-            images.forEach(img => {
-                if (img.dataset.src) img.src = img.dataset.src;
-                img.classList.remove('lazy');
-            });
-        }
-    }
+  // Mobile menu toggle (if needed in future)
+  const categoryItems = document.querySelectorAll('.category-menu__item');
+  categoryItems.forEach(item => {
+    item.addEventListener('click', function(e) {
+      // Add active state
+      categoryItems.forEach(i => i.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+});
 
-    function initNavToggle() {
-        const nav = qs('.main-nav');
-        const toggle = qs('.nav-toggle');
-        if (!nav || !toggle) return;
-        toggle.addEventListener('click', () => nav.classList.toggle('open'));
-    }
+// Handle action buttons
+const actionButtons = document.querySelectorAll('.header__action-btn');
+actionButtons.forEach(button => {
+  button.addEventListener('click', function() {
+    const text = this.querySelector('span').textContent;
+    alert(`Funkcja "${text}" - wkrótce dostępna!`);
+  });
+});
 
-    function init() {
-        setFooterYear();
-        renderNews(sampleNews(6));
-        initNavToggle();
-        window.addEventListener('resize', () => lazyLoadImages());
-    }
+// Image lazy loading fallback for older browsers
+if ('loading' in HTMLImageElement.prototype) {
+  const images = document.querySelectorAll('img[loading="lazy"]');
+  images.forEach(img => {
+    img.src = img.dataset.src || img.src;
+  });
+} else {
+  // Fallback for older browsers
+  const script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+  document.body.appendChild(script);
+}
 
-    document.addEventListener('DOMContentLoaded', init);
-})();
-// ...existing code...
+console.log('Portal informacyjny załadowany pomyślnie!');
