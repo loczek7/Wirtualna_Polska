@@ -7,19 +7,21 @@
     <link rel="stylesheet" href="../CSS/Main.css">
 </head>
 <body>
-    <div class="app">
+    <div class="app" id="top">
         <!-- Header -->
         <header class="header">
             <div class="header__container">
                 <div class="header__content">
                     <!-- Logo -->
                     <div class="header__logo">
+                        <a href="#top" class="header__logo-link" aria-label="Przejdź na górę">
                         <svg class="header__logo-svg" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="35" height="40" fill="#D91E18"/>
                             <text x="5" y="28" fill="white" font-size="24" font-weight="900" font-family="Arial, sans-serif">WP</text>
                             <text x="42" y="20" fill="#D91E18" font-size="13" font-weight="800" font-family="Arial, sans-serif">Wirtualna</text>
                             <text x="42" y="33" fill="#D91E18" font-size="13" font-weight="800" font-family="Arial, sans-serif">Polska</text>
                         </svg>
+                        </a>
                     </div>
 
                     <!-- Search Bar -->
@@ -63,34 +65,34 @@
             <div class="category-menu__container">
                 <ul class="category-menu__list">
                     <li class="category-menu__item">
-                        <a href="#" class="category-menu__link">Wiadomości</a>
+                        <a href="#info" class="category-menu__link">Wiadomości</a>
                     </li>
                     <li class="category-menu__item">
-                        <a href="#" class="category-menu__link">Sport</a>
+                        <a href="#sport" class="category-menu__link">Sport</a>
                     </li>
                     <li class="category-menu__item">
-                        <a href="#" class="category-menu__link">Biznes</a>
+                        <a href="#business" class="category-menu__link">Biznes</a>
                     </li>
                     <li class="category-menu__item">
-                        <a href="#" class="category-menu__link">Rozrywka</a>
+                        <a href="#fun" class="category-menu__link">Rozrywka</a>
                     </li>
                     <li class="category-menu__item">
-                        <a href="#" class="category-menu__link">Kobieta</a>
+                        <a href="#woman" class="category-menu__link">Kobieta</a>
                     </li>
                     <li class="category-menu__item">
-                        <a href="#" class="category-menu__link">Tech</a>
+                        <a href="#tech" class="category-menu__link">Tech</a>
                     </li>
                     <li class="category-menu__item">
-                        <a href="#" class="category-menu__link">Motoryzacja</a>
+                        <a href="#car" class="category-menu__link">Motoryzacja</a>
                     </li>
                     <li class="category-menu__item">
-                        <a href="#" class="category-menu__link">Podróże</a>
+                        <a href="#travel" class="category-menu__link">Podróże</a>
                     </li>
                     <li class="category-menu__item">
-                        <a href="#" class="category-menu__link">Lifestyle</a>
+                        <a href="#lifestyle" class="category-menu__link">Lifestyle</a>
                     </li>
                     <li class="category-menu__item">
-                        <a href="#" class="category-menu__link">Zdrowie</a>
+                        <a href="#health" class="category-menu__link">Zdrowie</a>
                     </li>
                 </ul>
             </div>
@@ -180,7 +182,7 @@
             </div>
 
             <!-- News Section: Najnowsze wiadomości -->
-            <section class="news-grid">
+            <section class="news-grid" id="info">
                 <div class="news-grid__header">
                     <h2 class="news-grid__title">Najnowsze wiadomości</h2>
                 </div>
@@ -268,7 +270,7 @@
             </div>
 
             <!-- News Section: Lifestyle -->
-            <section class="news-grid">
+            <section class="news-grid" id="lifestyle">
                 <div class="news-grid__header">
                     <h2 class="news-grid__title">Lifestyle</h2>
                 </div>
@@ -356,7 +358,7 @@
             </div>
 
             <!-- News Section: Sport -->
-            <section class="news-grid">
+            <section class="news-grid" id="sport">
                 <div class="news-grid__header">
                     <h2 class="news-grid__title">Sport</h2>
                 </div>

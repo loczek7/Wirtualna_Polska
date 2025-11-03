@@ -1,5 +1,3 @@
-// Simple JavaScript for interactivity
-
 // Search functionality
 const searchInput = document.querySelector('.header__search-input');
 if (searchInput) {
@@ -8,14 +6,12 @@ if (searchInput) {
       const searchTerm = this.value.trim();
       if (searchTerm) {
         alert(`Szukanie: "${searchTerm}"`);
-        // Here you would typically redirect to a search results page
-        // window.location.href = `/search?q=${encodeURIComponent(searchTerm)}`;
       }
     }
   });
 }
 
-// Smooth scroll for anchor links
+// Smooth scroll for anchor links 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     e.preventDefault();
