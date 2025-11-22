@@ -1,0 +1,7 @@
+DO ZROBIENIA: (Po skończeniu nalepiej odznaczać jako DONE)
+1. Header w JS + Pogoda i może opcje logowania się -------Marcel i SZYMON
+2. Newsy + info ----Paweł i Bogusz
+3. RESPONSYWNOŚĆ , lighthouse ---- Natalia
+4. Znaleść zdjęcia i jakieś info dla części News i info ---Dominik (Figma)
+5. Reklamy MOŻE
+Wykładowca SZYMON GUZIK
