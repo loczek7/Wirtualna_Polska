@@ -1,0 +1,29 @@
+{
+  "name": "wirtualna_polska",
+  "version": "1.0.0",
+  "description": "Poruszanie się po projekcie : \r  1. Każdy z nas ma swojego BRANCHA i ma na nim pracować (twoje inicjały to twój branch) PS. Ja pisze i commituje na main.\r  2. Ważne polecenia które musicie znać :\r     - git clone https://github.com/loczek7/Wirtualna_Polska.git - Klonuje dokłądnie to repozytorium\r     - git branch - Pokazuje na jakim branchu aktualnie jesteś\r     - git switch nazwa brancha - Przełącza cię na brancha którego nazwę podałeś\r     - git commit . - Dodaje i wyrzuca plik co commita (commit należy napisać tak aby było wiadomo o co chodzi proszę)\r     - git pull - Ściąga kod z repozytorium\r     - git push - Wysyła zmiany na repozytorium\r 3. W razie pytań piszcie na discordzie, bądź Messengerze",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loczek7/Wirtualna_Polska.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/loczek7/Wirtualna_Polska/issues"
+  },
+  "homepage": "https://github.com/loczek7/Wirtualna_Polska#readme",
+  "devDependencies": {
+    "@nuxt/devtools": "^3.1.0",
+    "nuxt": "^4.2.1",
+    "sass": "^1.94.2"
+  }
+}

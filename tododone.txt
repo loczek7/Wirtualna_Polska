@@ -1,0 +1,122 @@
+Zadania wykonane:
+
+1. ✅ Przeanalizowano pliki Index.html, Main.js, Main.css i globals.css
+   - Zidentyfikowano strukturę aplikacji: header, menu kategorii, sekcja hero, siatka wiadomości, footer
+   - Przeanalizowano funkcjonalności: wyszukiwarka, widget pogody, animacje scroll, smooth scroll
+
+2. ✅ Zainicjalizowano projekt Nuxt.js z Vue
+   - Utworzono package.json
+   - Zainstalowano Nuxt.js (v4.2.1) i @nuxt/devtools
+   - Utworzono nuxt.config.ts
+   - Dodano skrypty npm: dev, build, generate, preview
+   - Utworzono strukturę katalogów: app, pages, components, assets/styles, composables, public
+
+3. ✅ Zainstalowano SCSS
+   - Zainstalowano sass (v1.94.2)
+   - Utworzono assets/styles/variables.scss z zmiennymi SCSS
+   - Utworzono assets/styles/main.scss z konwersją całego CSS na SCSS
+
+4. ✅ Przekonwertowano HTML na komponenty Vue
+   - AppHeader.vue - header z logo, wyszukiwarką i akcjami
+   - WeatherWidget.vue - widget pogody z integracją OpenWeather API
+   - CategoryMenu.vue - menu kategorii z nawigacją
+   - AdBanner.vue - komponent banerów reklamowych
+   - HeroSection.vue - sekcja hero z głównym artykułem i bocznymi
+   - NewsGrid.vue - siatka wiadomości z artykułami
+   - AppFooter.vue - stopka z linkami
+   - app.vue - główny komponent aplikacji
+   - pages/index.vue - strona główna z wszystkimi sekcjami
+
+5. ✅ Przekonwertowano JavaScript na Vue composables/logikę
+   - useWeather.ts - composable do obsługi widgetu pogody (OpenWeather API)
+   - useSearch.ts - composable do obsługi wyszukiwarki
+   - Funkcjonalności: smooth scroll, animacje scroll, obsługa kliknięć
+
+6. ✅ Przekonwertowano CSS na SCSS
+   - Utworzono variables.scss z wszystkimi zmiennymi (kolory, spacing, shadows, transitions)
+   - Utworzono main.scss z pełną konwersją CSS na SCSS z użyciem zmiennych
+   - Dodano style dla widgetu pogody
+   - Zachowano wszystkie animacje i responsive design
+
+7. ✅ Reorganizacja struktury projektu
+   - Przeniesiono wszystkie pliki do folderu app/ zgodnie z konwencją Nuxt 3
+   - Przeniesiono assets/ do app/assets/
+   - Przeniesiono components/ do app/components/
+   - Przeniesiono pages/ do app/pages/
+   - Przeniesiono app.vue do app/app.vue
+   - Przeniesiono composables/ do app/components/ (useWeather.ts, useSearch.ts)
+   - Usunięto stare foldery z głównego katalogu (assets, components, pages, composables)
+   - Zaktualizowano nuxt.config.ts z nową ścieżką do stylów: ~/app/assets/styles/main.scss
+
+8. ✅ Zaktualizowano README.md
+   - Dodano instrukcje instalacji i uruchomienia aplikacji
+   - Dodano szczegółowe instrukcje pracy z Git i branchami
+   - Dodano instrukcje jak pobrać kod z brancha main do swojego brancha
+   - Dodano opis struktury projektu
+   - Dodano listę technologii i komponentów
+
+Struktura projektu Nuxt (po reorganizacji):
+- app/
+  - app.vue - główny layout
+  - pages/index.vue - strona główna
+  - components/ - wszystkie komponenty Vue i composables
+  - assets/styles/ - style SCSS (variables.scss, main.scss)
+- nuxt.config.ts - konfiguracja Nuxt
+- package.json - zależności i skrypty
+
+Aplikacja jest gotowa do uruchomienia komendą: npm run dev
+
+9. ✅ Finalna reorganizacja composables
+   - Przeniesiono composables z app/composables/ do app/components/
+   - useWeather.ts i useSearch.ts są teraz w app/components/ razem z komponentami Vue
+   - Usunięto folder app/composables/
+   - Zaktualizowano nuxt.config.ts: zmieniono imports.dirs z ['composables'] na ['components']
+   - Nuxt automatycznie rozpoznaje pliki .ts w components jako composables i auto-importuje je
+
+10. ✅ Sprawdzenie i weryfikacja ścieżek
+    - Wszystkie ścieżki w projekcie są poprawne
+    - nuxt.config.ts: srcDir: 'app', css: '~/assets/styles/main.scss' (względem app/)
+    - Composables w app/components/ są poprawnie auto-importowane
+    - Komponenty Vue w app/components/ są poprawnie rozpoznawane
+    - Strony w app/pages/ są poprawnie routowane
+    - Style SCSS w app/assets/styles/ są poprawnie importowane
+    - Linter nie pokazuje błędów
+
+Finalna struktura projektu:
+- app/
+  - app.vue - główny layout
+  - pages/index.vue - strona główna
+  - components/ - komponenty Vue (.vue) i composables (.ts)
+    - *.vue (7 komponentów)
+    - useWeather.ts
+    - useSearch.ts
+  - assets/styles/ - style SCSS
+    - variables.scss
+    - main.scss
+- nuxt.config.ts - konfiguracja (srcDir: 'app', imports.dirs: ['components'])
+- package.json - zależności i skrypty
+
+11. ✅ Konwersja composables z .ts na .vue
+    - Przepisano useWeather.ts na useWeather.vue
+    - Przepisano useSearch.ts na useSearch.vue
+    - Wszystkie composables są teraz w formacie .vue w folderze app/components/
+    - Usunięto stare pliki .ts
+    - Nuxt automatycznie rozpoznaje pliki .vue z eksportem funkcji jako composables
+
+12. ✅ Aktualizacja .gitignore
+    - Dodano todo.txt do .gitignore
+    - Dodano tododone.txt do .gitignore
+    - Pliki zarządzania projektem nie będą pushowane do repozytorium
+
+Aktualna struktura projektu:
+- app/
+  - app.vue - główny layout
+  - pages/index.vue - strona główna
+  - components/ - wszystkie komponenty Vue i composables (wszystkie w formacie .vue)
+    - *.vue (9 plików: 7 komponentów + 2 composables)
+  - assets/styles/ - style SCSS
+    - variables.scss
+    - main.scss
+- nuxt.config.ts - konfiguracja (srcDir: 'app', imports.dirs: ['components'])
+- package.json - zależności i skrypty
+- .gitignore - z wykluczeniem todo.txt i tododone.txt
