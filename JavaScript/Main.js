@@ -84,3 +84,93 @@ if ('loading' in HTMLImageElement.prototype) {
 }
 
 console.log('Portal informacyjny załadowany pomyślnie!');
+
+
+
+/* pogoda */
+
+/* pogoda — OpenWeather: ikona + temperatura (WP-like) */
+(() => {
+  // 1) KONFIG
+  const OPENWEATHER_KEY = '0a13b4073062f47bfb4149852ce1b6ae'; // Twój klucz
+  const DEFAULT_CITY = 'Warszawa';
+
+  const apiUrl = (city) =>
+    `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${OPENWEATHER_KEY}&units=metric&lang=pl`;
+
+  const iconUrl = (code) => `https://openweathermap.org/img/wn/${code}@2x.png`;
+
+  // 2) ZNAJDŹ MIEJSCE I WSTAW WIDGET (po lewej od searcha)
+  const headerSearch = document.querySelector('.header__search');
+  if (!headerSearch) return;
+
+  const widget = document.createElement('div');
+  widget.className = 'wp-weather';
+  widget.innerHTML = `
+    <img class="wp-weather__icon" alt="ikona pogody" />
+    <div class="wp-weather__content">
+      <div class="wp-weather__city" aria-live="polite">${DEFAULT_CITY}</div>
+      <div class="wp-weather__chev">▾</div>
+      <div class="wp-weather__temp"><span class="wpw-temp">–</span>°</div>
+    </div>
+    <div class="wp-weather__form" role="dialog" aria-label="Wybierz miasto">
+      <input class="wp-weather__input" type="text" placeholder="Miasto w Polsce" />
+      <button class="wp-weather__submit" title="Szukaj" aria-label="Szukaj">🔍</button>
+    </div>
+  `;
+  headerSearch.parentElement.insertBefore(widget, headerSearch);
+
+  // 3) REFERENCJE
+  const iconEl = widget.querySelector('.wp-weather__icon');
+  const cityEl = widget.querySelector('.wp-weather__city');
+  const tempEl = widget.querySelector('.wpw-temp');
+  const form = widget.querySelector('.wp-weather__form');
+  const input = widget.querySelector('.wp-weather__input');
+  const submitBtn = widget.querySelector('.wp-weather__submit');
+  const chev = widget.querySelector('.wp-weather__chev');
+
+  // 4) POBIERANIE I RENDER
+  async function loadCity(city) {
+    try {
+      tempEl.textContent = '…';
+      const res = await fetch(apiUrl(city));
+      if (!res.ok) throw new Error(`API: ${res.status}`);
+      const data = await res.json();
+
+      const tempC = Math.round(data.main.temp);
+      const icon = data.weather && data.weather[0] ? data.weather[0].icon : '01d';
+      const name = data.name || city;
+
+      cityEl.textContent = name;
+      tempEl.textContent = String(tempC);
+      iconEl.src = iconUrl(icon);
+      iconEl.alt = data.weather && data.weather[0] ? data.weather[0].description : 'Pogoda';
+
+      form.classList.remove('open');
+    } catch (err) {
+      // delikatny fallback — nie psujemy UI
+      tempEl.textContent = '–';
+      iconEl.src = iconUrl('10d');
+      iconEl.alt = 'Brak danych';
+      console.warn('Weather error:', err);
+    }
+  }
+
+  // 5) INTERAKCJE
+  const toggleForm = () => form.classList.toggle('open');
+  cityEl.addEventListener('click', toggleForm);
+  chev.addEventListener('click', toggleForm);
+  document.addEventListener('click', (e) => {
+    if (!widget.contains(e.target)) form.classList.remove('open');
+  });
+
+  function submitCity() {
+    const q = (input.value || '').trim();
+    if (q) loadCity(q);
+  }
+  submitBtn.addEventListener('click', (e) => { e.preventDefault(); submitCity(); });
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); submitCity(); } });
+
+  // 6) START — domyślnie Warszawa
+  loadCity(DEFAULT_CITY);
+})();
