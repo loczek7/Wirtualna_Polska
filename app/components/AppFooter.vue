@@ -2,86 +2,31 @@
   <footer class="footer">
     <div class="footer__container">
       <div class="footer__sections">
-        <div>
-          <h3 class="footer__section-title">Informacje</h3>
+        <div
+          v-for="section in sections"
+          :key="section.id"
+          class="footer__section"
+          :class="{ active: activeSection === section.id }"
+          @click="setActiveSection(section.id)"
+        >
+          <h3 class="footer__section-title">
+            <a
+              :href="`#${section.id}`"
+              class="footer__section-link"
+              @click.prevent="scrollToSection(section.id)"
+            >
+              {{ section.title }}
+            </a>
+          </h3>
           <ul class="footer__list">
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">O nas</a>
-            </li>
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Kontakt</a>
-            </li>
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Reklama</a>
-            </li>
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Polityka prywatności</a>
-            </li>
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Regulamin</a>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="footer__section-title">Kategorie</h3>
-          <ul class="footer__list">
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Wiadomości</a>
-            </li>
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Sport</a>
-            </li>
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Biznes</a>
-            </li>
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Rozrywka</a>
-            </li>
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Tech</a>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="footer__section-title">Serwisy</h3>
-          <ul class="footer__list">
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Poczta</a>
-            </li>
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Pogoda</a>
-            </li>
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Horoskop</a>
-            </li>
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Program TV</a>
-            </li>
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Finanse</a>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="footer__section-title">Obserwuj nas</h3>
-          <ul class="footer__list">
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Facebook</a>
-            </li>
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Twitter</a>
-            </li>
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">Instagram</a>
-            </li>
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">YouTube</a>
-            </li>
-            <li class="footer__list-item">
-              <a href="#" class="footer__link">RSS</a>
+            <li
+              v-for="item in section.items"
+              :key="item.id"
+              class="footer__list-item"
+            >
+              <a :href="`#${item.id}`" class="footer__link" @click.prevent="scrollToSection(item.id)">
+                {{ item.name }}
+              </a>
             </li>
           </ul>
         </div>
@@ -95,6 +40,77 @@
 </template>
 
 <script setup lang="ts">
-// Footer component - no logic needed
+import { ref } from 'vue'
+
+const sections = [
+  {
+    id: 'info',
+    title: 'Informacje',
+    items: [
+      { id: 'about', name: 'O nas' },
+      { id: 'contact', name: 'Kontakt' },
+      { id: 'advertising', name: 'Reklama' },
+      { id: 'privacy', name: 'Polityka prywatności' },
+      { id: 'terms', name: 'Regulamin' }
+    ]
+  },
+  {
+    id: 'categories',
+    title: 'Kategorie',
+    items: [
+      { id: 'info', name: 'Wiadomości' },
+      { id: 'sport', name: 'Sport' },
+      { id: 'business', name: 'Biznes' },
+      { id: 'fun', name: 'Rozrywka' },
+      { id: 'tech', name: 'Tech' },
+      { id: 'travel', name: 'Podróże' },
+      { id: 'lifestyle', name: 'Lifestyle' }
+    ]
+  },
+  {
+    id: 'services',
+    title: 'Serwisy',
+    items: [
+      { id: 'mail', name: 'Poczta' },
+      { id: 'weather', name: 'Pogoda' },
+      { id: 'horoscope', name: 'Horoskop' },
+      { id: 'tv', name: 'Program TV' },
+      { id: 'finance', name: 'Finanse' }
+    ]
+  },
+  {
+    id: 'social',
+    title: 'Obserwuj nas',
+    items: [
+      { id: 'facebook', name: 'Facebook' },
+      { id: 'twitter', name: 'Twitter' },
+      { id: 'instagram', name: 'Instagram' },
+      { id: 'youtube', name: 'YouTube' },
+      { id: 'rss', name: 'RSS' }
+    ]
+  }
+]
+
+const activeSection = ref('info')
+
+const setActiveSection = (id: string) => {
+  activeSection.value = id
+}
+
+const scrollToSection = (id: string) => {
+  const target = document.querySelector(`#${id}`)
+  if (target) {
+    target.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    })
+  }
+}
 </script>
+<style scoped>
+a {
+  text-decoration: none;
+  color: inherit;
+}
+</style>
 
